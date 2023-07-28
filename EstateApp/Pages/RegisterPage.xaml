@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EstateApp.Pages.RegisterPage"
+             Title="RegisterPage">
+    
+    <VerticalStackLayout Margin="20,0,20,0"
+                         VerticalOptions="Center"
+                         Spacing="20">
+        <Image Source="dotnet_bot"
+               HorizontalOptions="Center"
+               HeightRequest="80"
+               WidthRequest="80"
+               />
+        <Label Text="Create a new account"
+               HorizontalOptions="Center"
+               FontSize="20"
+               />
+        <Label Text="Please enter your information below to create a new account for using the app."
+               />
+        <Entry x:Name="EntFullName"
+               Placeholder="FullName" />
+        <Entry x:Name="EntEmail"
+               Placeholder="Email" />
+        <Entry x:Name="EntPhone"  
+               Placeholder="Phone" />
+        <Entry x:Name="EntPassword"
+               Placeholder="Password"
+               IsPassword="True" />
+        <Button x:Name="BtnRegister"
+                Text="Register Now"
+                HeightRequest="40"
+                Clicked="BtnRegister_Clicked"
+                />
+
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label Text="Already have an account? "
+                   FontSize="20"
+                   />
+            <Label Text="Sign In"
+                   FontSize="20"
+                   TextColor="DarkGoldenrod"
+                   />
+            <HorizontalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer x:Name="TapLogin" Tapped="TapLogin_Tapped" />
+            </HorizontalStackLayout.GestureRecognizers>
+        </HorizontalStackLayout>
+        
+    </VerticalStackLayout>
+</ContentPage>
