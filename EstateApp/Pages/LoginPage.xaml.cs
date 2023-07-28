@@ -15,7 +15,7 @@ public partial class LoginPage : ContentPage
         if (response)
         {
             //await Navigation.PushModalAsync(new HomePage());
-            Application.Current.MainPage = new HomePage();
+            Application.Current.MainPage = new CustomTabbedPage();
         }
         else
         {
