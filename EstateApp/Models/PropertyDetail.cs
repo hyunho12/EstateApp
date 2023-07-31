@@ -22,13 +22,13 @@ namespace EstateApp.Models
         public string Address { get; set; }
 
         [JsonProperty("price")]
-        public int price { get; set; }
+        public int Price { get; set; }
 
         [JsonProperty("imageUrl")]
         public string ImageUrl { get; set; }
 
         [JsonProperty("phone")]
-        public string phone { get; set; }
+        public string Phone { get; set; }
 
         [JsonProperty("bookmark")]
         public Bookmark Bookmark { get; set; } 

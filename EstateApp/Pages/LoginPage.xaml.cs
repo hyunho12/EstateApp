@@ -25,6 +25,6 @@ public partial class LoginPage : ContentPage
 
     private async void TapJoinNow_Tapped(object sender, EventArgs e)
     {
-        await Navigation.PushModalAsync(new RegisterPage());
+        await Navigation.PushModalAsync(new HomePage());
     }
 }
