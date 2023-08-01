@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EstateWebApi.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BookmarksController : ControllerBase
     {

@@ -62,7 +62,7 @@ namespace EstateApp.Services
         {
             var httpClient = new HttpClient();
             //httpClient.DefaultRequestHeaders.Authorization 
-            var response = await httpClient.GetStringAsync("categories");
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Categories/GetCategory");
             return JsonConvert.DeserializeObject<List<Category>>(response);
         }
 
@@ -70,35 +70,35 @@ namespace EstateApp.Services
         {
             var httpClient = new HttpClient();
             //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer")
-            var response = await httpClient.GetStringAsync("localhost/Properties/TrendingProperties");
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/TrendingProperties");
             return JsonConvert.DeserializeObject<List<TrendingProperty>>(response);
         }
 
         public static async Task<List<SearchProperty>> FindProperties(string address)
         {
             var httpClient = new HttpClient();
-            var response = await httpClient.GetStringAsync("localhost/Properties/SearchProperties?address=" + address);
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/SearchProperties?address=" + address);
             return JsonConvert.DeserializeObject<List<SearchProperty>>(response);
         }
 
         public static async Task<List<PropertyByCategory>> GetPropertyByCategory(int categoryId)
         {
             var httpClient = new HttpClient();
-            var response = await httpClient.GetStringAsync("localhost/Properties/PropertyList?categoryId=" + categoryId);
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/PropertyList?categoryId=" + categoryId);
             return JsonConvert.DeserializeObject<List<PropertyByCategory>>(response);
         }
 
         public static async Task<PropertyDetail> GetPropertyDetail(int propertyId)
         {
             var httpClient = new HttpClient();
-            var response = await httpClient.GetStringAsync("localhost/Properties/PropertyDetail?id=" + propertyId);
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/PropertyDetail?id=" + propertyId);
             return JsonConvert.DeserializeObject<PropertyDetail>(response);
         }
 
         public static async Task<List<BookmarkList>> GetBookmarkList()
         {
             var httpClient = new HttpClient();
-            var response = await httpClient.GetStringAsync("localhost/bookmarks");
+            var response = await httpClient.GetStringAsync("api/bookmarks");
             return JsonConvert.DeserializeObject<List<BookmarkList>>(response);
         }
 
@@ -107,7 +107,7 @@ namespace EstateApp.Services
             var httpClient = new HttpClient();
             var json = JsonConvert.SerializeObject(addBookmark);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync("localhost/bookmarks", content);
+            var response = await httpClient.PostAsync(AppSettings.ApiUrl + "api/bookmarks", content);
             if (!response.IsSuccessStatusCode) { return false; }
             return true;
         }

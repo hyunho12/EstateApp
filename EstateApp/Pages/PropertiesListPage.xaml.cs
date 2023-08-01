@@ -5,7 +5,11 @@ namespace EstateApp.Pages;
 
 public partial class PropertiesListPage : ContentPage
 {
-	public PropertiesListPage(int categoryId, string categoryName)
+    public PropertiesListPage()
+    {
+        InitializeComponent();
+    }
+    public PropertiesListPage(int categoryId, string categoryName)
 	{
 		InitializeComponent();
 		Title = categoryName;

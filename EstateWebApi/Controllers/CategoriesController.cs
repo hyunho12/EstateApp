@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace EstateWebApi.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
