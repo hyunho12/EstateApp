@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EstateV1App.Pages.HomePage"
+             Title="HomePage">
+
+    <ScrollView>
+        <Grid RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <VerticalStackLayout Grid.Row="0">
+                <Label x:Name="LblUserName"
+                       FontSize="Medium" />
+                <Label Text="Find your best place to stay"
+                       FontSize="Medium" />
+            </VerticalStackLayout>
+
+            <Frame Grid.Row="1">
+                <HorizontalStackLayout>
+                    <Image Source="search_icon"
+                           HeightRequest="25"
+                           WidthRequest="25" />
+                    <Label Text="Search..."
+                           VerticalOptions="Center"
+                           />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <VerticalStackLayout Grid.Row="2" Spacing="10">
+                <Label Text="Categories"
+                       FontSize="20" />
+                <CollectionView x:Name="CvCategories"
+                                SelectionChanged="CvCategories_SelectionChanged">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame>
+                                <HorizontalStackLayout>
+                                    <Image Source="{Binding FullImageUrl}"
+                                           WidthRequest="30"
+                                           HeightRequest="30" />
+                                    <Label VerticalOptions="Center"
+                                           FontSize="20"
+                                           Text="{Binding Name}" />
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="3">
+                <Label Text="Top Picks"
+                       FontSize="20" />
+                <CollectionView x:Name="CvTopPicks"
+                                SelectionChanged="CvTopPicks_SelectionChanged">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="25">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Frame Grid.Row="0">
+                                        <Image Source="{Binding FullImageUrl}"
+                                               Aspect="Fill" />
+                                    </Frame>
+
+                                    <Label Grid.Row="1"
+                                           FontSize="Subtitle"
+                                           Text="{Binding Name}" />
+                                    <Label Grid.Row="2"
+                                           WidthRequest="250"
+                                           Text="{Binding Address}" />
+                                    <Label Grid.Row="3"
+                                           FontSize="Subtitle"
+                                           Text="{Binding Price}" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

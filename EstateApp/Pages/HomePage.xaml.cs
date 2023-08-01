@@ -22,7 +22,7 @@ public partial class HomePage : ContentPage
 	private async void GetCategories()
 	{
 		var categories = await ApiService.GetCategories();
-		CvCategories.ItemsSource = categories;
+		CvCategories.ItemsSource = categories;		
 	}
 
     private void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)

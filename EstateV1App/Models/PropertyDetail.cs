@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EstateApp.Models
+namespace EstateV1App.Models
 {
     public class PropertyDetail
     {
@@ -50,4 +50,5 @@ namespace EstateApp.Models
         [JsonProperty("status")]
         public bool Status { get; set; }
     }
+}
 }

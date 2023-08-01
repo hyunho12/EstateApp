@@ -56,11 +56,12 @@ namespace EstateApp.Services
             Preferences.Set("username", result.UserName);
 
             return true;
-        }
-        
+        }               
+
         public static async Task<List<Category>> GetCategories()
         {
-            var httpClient = new HttpClient();
+            HttpsClientHandlerService handler = new HttpsClientHandlerService();
+            var httpClient = new HttpClient(handler.GetPlatformMessageHandler());
             //httpClient.DefaultRequestHeaders.Authorization 
             var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Categories/GetCategory");
             return JsonConvert.DeserializeObject<List<Category>>(response);

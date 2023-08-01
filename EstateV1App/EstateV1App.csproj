@@ -1,21 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android33.0</TargetFrameworks>
+		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
-		<RootNamespace>EstateApp</RootNamespace>
+		<RootNamespace>EstateV1App</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>EstateApp</ApplicationTitle>
+		<ApplicationTitle>EstateV1App</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.estateapp</ApplicationId>
-		<ApplicationIdGuid>23625c65-c4da-42a3-bb43-f8ff0fcfb352</ApplicationIdGuid>
+		<ApplicationId>com.companyname.estatev1app</ApplicationId>
+		<ApplicationIdGuid>6a38ddf2-4fa5-432a-af24-d39253547171</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -48,52 +49,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
-	  <None Remove="Resources\Images\about_icon.svg" />
-	  <None Remove="Resources\Images\back_icon.svg" />
-	  <None Remove="Resources\Images\bookmark_empty_icon.svg" />
-	  <None Remove="Resources\Images\bookmark_fill_icon.svg" />
-	  <None Remove="Resources\Images\bookmark_icon.svg" />
-	  <None Remove="Resources\Images\faq_icon.svg" />
-	  <None Remove="Resources\Images\home_icon.svg" />
-	  <None Remove="Resources\Images\house02.jpg" />
-	  <None Remove="Resources\Images\left_arrow_icon.svg" />
-	  <None Remove="Resources\Images\location_icon.svg" />
-	  <None Remove="Resources\Images\logout_icon.svg" />
-	  <None Remove="Resources\Images\message_icon.svg" />
-	  <None Remove="Resources\Images\phone_icon.svg" />
-	  <None Remove="Resources\Images\privacy_icon.svg" />
-	  <None Remove="Resources\Images\search_icon.svg" />
-	  <None Remove="Resources\Images\settings_icon.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\BookmarksPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\CustomTabbedPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Pages\HomePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\LoginPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\PropertiesListPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\PropertyDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\RegisterPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
