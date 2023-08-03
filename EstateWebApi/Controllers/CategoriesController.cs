@@ -1,4 +1,5 @@
-﻿using EstateWebApi.Models;
+﻿using EstateWebApi.Data;
+using EstateWebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
@@ -9,8 +10,8 @@ namespace EstateWebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
-    {
-      
+    {      
+        ApiDbContext dbContext = new ApiDbContext();
 
         [HttpGet("GetCategory")]
         public IActionResult GetCategory()

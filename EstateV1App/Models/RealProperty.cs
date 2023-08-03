@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EstateV1App.Models
 {
-    public class SearchProperty
+    public class RealProperty
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -23,6 +23,8 @@ namespace EstateV1App.Models
 
         [JsonProperty("imageUrl")]
         public string ImageUrl { get; set; }
+
+        public string FullImageUrl => AppSettings.ApiUrl + ImageUrl;
 
         [JsonProperty("price")]
         public int Price { get; set; }

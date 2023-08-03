@@ -1,4 +1,5 @@
-﻿using EstateWebApi.Models;
+﻿using EstateWebApi.Data;
+using EstateWebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +9,15 @@ namespace EstateWebApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        ApiDbContext dbContext = new ApiDbContext();
+
         public UsersController() 
         {
             
         }
 
-        [HttpGet("GetUser")]
+        [HttpGet("[action]")]
+        //[HttpGet("GetUser")]
         public IActionResult GetUser()
         {
             List<User> users = new List<User>
@@ -27,5 +31,7 @@ namespace EstateWebApi.Controllers
 
             return Ok(users);
         }
+
+
     }
 }

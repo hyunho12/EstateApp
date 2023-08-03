@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EstateV1App.Models
 {
-    public class Category
+    public class User
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -15,12 +15,13 @@ namespace EstateV1App.Models
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("imageUrl")]
-        public string ImageUrl { get; set; }
+        [JsonProperty("email")]
+        public string Email { get; set; }
 
-        public string FullImageUrl => AppSettings.ApiUrl + ImageUrl;
+        [JsonProperty("password")]
+        public string Password { get; set; }
 
-        [JsonProperty("properties")]
-        public object Properties { get; set; }
+        [JsonProperty("phone")]
+        public string Phone { get; set; }
     }
 }
