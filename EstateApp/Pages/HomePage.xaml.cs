@@ -10,7 +10,7 @@ public partial class HomePage : ContentPage
 	{
 		InitializeComponent();
 		GetCategories();
-		//GetTrendingProperties();
+		GetTrendingProperties();
 	}
 
 	private async void GetTrendingProperties()

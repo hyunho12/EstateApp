@@ -38,7 +38,7 @@
                 <Label Text="Categories"
                    FontSize="Large"/>
                 <CollectionView x:Name="CvCategories"
-                            HeightRequest="50"
+                            HeightRequest="60"
                             SelectionMode="Single"
                             SelectionChanged="CvCategories_SelectionChanged">
                     <CollectionView.ItemsLayout>
@@ -49,7 +49,7 @@
                             <Frame>
                                 <HorizontalStackLayout Spacing="5">
                                     <Image Aspect="AspectFit"
-                                           HeightRequest="30"
+                                           HeightRequest="60"
                                            WidthRequest="30"
                                            Source="{Binding FullImageUrl}"/>
                                     <Label VerticalOptions="Center"
