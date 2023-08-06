@@ -31,10 +31,11 @@ namespace EstateV1App.Services
             return JsonConvert.DeserializeObject<List<PropertyByCategory>>(response);
         }
 
-        //public static async Task<PropertyDetail> GetPropertyDetail(int propertyId)
-        //{
-        //    HttpClient httpClient = new HttpClient();
-        //    var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/")
-        //}
+        public static async Task<PropertyDetail> GetPropertyDetail(int propertyId)
+        {
+            HttpClient httpClient = new HttpClient();
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/GetRealPropertyDetail?propertyId=" + propertyId);
+            return JsonConvert.DeserializeObject<PropertyDetail>(response); // 현재 api서버에서 list 형식으로 반환 json 매핑 오류
+        }
     }
 }

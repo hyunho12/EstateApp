@@ -8,8 +8,8 @@ namespace EstateV1App
         {
             InitializeComponent();
 
-            //MainPage = new AppShell();
-            MainPage = new HomePage();
+            MainPage = new AppShell();
+            //MainPage = new HomePage();
         }
     }
 }

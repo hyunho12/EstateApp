@@ -24,17 +24,16 @@ public partial class HomePage : ContentPage
 		CvTopPicks.ItemsSource = properties;
 	}
 
-    private void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
 		var currentSelection = e.CurrentSelection.FirstOrDefault() as Category;
 		if (currentSelection == null) return;
-		Navigation.PushAsync(new PropertiesListPage(currentSelection.Id, currentSelection.Name));
+		await Navigation.PushAsync(new PropertiesListPage(currentSelection.Id, currentSelection.Name));
 		((CollectionView)sender).SelectedItem = null;
 	}
 
     private void CvTopPicks_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-		Navigation.PushAsync(new PropertyDetailPage());
+    {		
 		//var currentSelection = e.CurrentSelection.FirstOrDefault() as TrendingProperty;
 		//if(currentSelection == null) { return; }
 		//Navigation.PushAsync(new PropertyDetailPage(currentSelection.Id));		

@@ -4,11 +4,21 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:EstateV1App"
+    xmlns:pages="clr-namespace:EstateV1App.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    
+
+    <TabBar>
+        <Tab Title="Home" Icon="home_icon">
+            <ShellContent Title="Home" Route="Home" Icon="home_icon" ContentTemplate="{DataTemplate pages:HomePage}" />
+        </Tab>
+        <Tab Title="북마크" Icon="bookmark_icon">
+            <ShellContent Title="Saved" Route="bookmark" ContentTemplate="{DataTemplate pages:BooksmarkPage}" />
+        </Tab>
+        <Tab Title="설정" Icon="settings_icon">
+            <ShellContent Title="Settings" Route="setting" ContentTemplate="{DataTemplate pages:SettingsPage}" />
+        </Tab>
+    </TabBar>
 
 </Shell>

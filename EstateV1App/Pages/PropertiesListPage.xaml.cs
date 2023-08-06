@@ -21,9 +21,9 @@ public partial class PropertiesListPage : ContentPage
 
     private void CvProperties_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        //var currentSelection = e.CurrentSelection.FirstOrDefault() as PropertyByCategory;
-        //if (currentSelection == null) return;
-        //Navigation.PushModalAsync(new PropertyDetailPage(currentSelection.Id));
-        //((CollectionView)sender).SelectedItem = null;
+        var currentSelection = e.CurrentSelection.FirstOrDefault() as PropertyByCategory;
+        if (currentSelection == null) return;
+        Navigation.PushModalAsync(new PropertyDetailPage(currentSelection.Id));
+        ((CollectionView)sender).SelectedItem = null;
     }
 }

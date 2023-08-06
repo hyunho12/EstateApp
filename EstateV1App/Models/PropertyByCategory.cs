@@ -38,7 +38,7 @@ namespace EstateV1App.Models
         [JsonProperty("userId")]
         public int UserId { get; set; }
 
-        [JsonProperty("bookmarks")]
-        public object Bookmarks { get; set; }
+        //[JsonProperty("bookmarks")]
+        //public object Bookmarks { get; set; }
     }
 }

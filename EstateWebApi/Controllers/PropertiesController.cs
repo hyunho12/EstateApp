@@ -1,6 +1,8 @@
 ﻿using EstateWebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using EstateWebApi.Data;
+using EstateV1App.Models;
 
 namespace EstateWebApi.Controllers
 {
@@ -33,8 +35,8 @@ namespace EstateWebApi.Controllers
 
         [HttpGet("GetRealPropertyList")]
         public IActionResult GetPropertiesList(int categoryId)
-        {
-            List<RealProperty> properties = new List<RealProperty>();
+        {            
+            List<RealProperty> properties = new List<RealProperty>();            
 
             if(categoryId == 1)
             {
@@ -68,6 +70,47 @@ namespace EstateWebApi.Controllers
                         CategoryId = 4, UserId = 2},                
                 };
             }            
+
+            return Ok(properties);
+        }
+
+        [HttpGet("GetRealPropertyDetail")]
+        public IActionResult GetRealPropertyDetail(int propertyId)
+        {
+            List<PropertyDetail> properties = new List<PropertyDetail>();
+
+            if (propertyId == 1)
+            {
+                properties = new List<PropertyDetail>
+                {
+                    new PropertyDetail{Id = 2, Name = "Marina", Detail = "Sky global Real Estate", Address = "Dubai", Price = 70000, ImageUrl = "imagep2.jpg",  
+                         Phone = "010-5545-6985"}
+                };
+            }
+            else if (propertyId == 2)
+            {
+                properties = new List<PropertyDetail>
+                {
+                    new PropertyDetail{Id = 4, Name = "Avant Tower", Detail = "Three bed room apartment", Address = "Dubai Marina", Price = 40000, ImageUrl = "imagep7.jpg", 
+                        Phone = "010-4587-2685"}
+                };
+            }
+            else if (propertyId == 3)
+            {
+                properties = new List<PropertyDetail>
+                {
+                    new PropertyDetail{Id = 1, Name = "Blue World", Detail = "two bedroom blue world", Address = "Dubai Marina", Price = 30000, ImageUrl = "imagep7.jpg",
+                         Phone = "010-2335-5543"}
+                };
+            }
+            else if (propertyId == 4)
+            {
+                properties = new List<PropertyDetail>
+                {
+                    new PropertyDetail{Id = 3, Name = "Palm View", Detail = "Allsopp Real Estate", Address = "Palm Tower", Price = 75000, ImageUrl = "imagep5.jpg",  
+                        Phone = "010-4529-8569"}
+                };
+            }
 
             return Ok(properties);
         }
