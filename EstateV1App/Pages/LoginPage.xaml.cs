@@ -6,4 +6,14 @@ public partial class LoginPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void BtnLogin_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void TapJoinNow_Tapped(object sender, EventArgs e)
+    {
+
+    }
 }

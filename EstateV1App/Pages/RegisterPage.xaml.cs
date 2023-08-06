@@ -6,4 +6,14 @@ public partial class RegisterPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void TapLogin_Tapped(object sender, EventArgs e)
+    {
+
+    }
+
+    private void BtnRegister_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }
