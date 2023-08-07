@@ -37,6 +37,8 @@ namespace EstateV1App.Services
             };
             HttpClient client = new HttpClient();
             var json = JsonConvert.SerializeObject(login);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
         }
 
         public static async Task<List<Category>> GetCategories()
