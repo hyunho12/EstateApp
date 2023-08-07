@@ -11,7 +11,7 @@ namespace EstateWebApi.Models
 
         [Required(ErrorMessage = "Image url can't be null or empty")]
         public string ImageUrl { get; set; }
-        
 
+        public ICollection<RealProperty> RealProperties { get; set; }
     }
 }

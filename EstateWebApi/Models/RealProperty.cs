@@ -1,4 +1,6 @@
-﻿namespace EstateWebApi.Models
+﻿using System.Text.Json.Serialization;
+
+namespace EstateWebApi.Models
 {
     public class RealProperty
     {
@@ -10,6 +12,15 @@
         public double Price { get; set; }
         public bool IsTrending { get; set; }
         public int CategoryId { get; set; }
+
+        [JsonIgnore]
+        public Category Category { get; set; }
+
         public int UserId { get; set; }
+
+        [JsonIgnore]
+        public User User { get; set; }
+
+        public ICollection<Bookmark> Bookmarks { get; set; }
     }
 }
