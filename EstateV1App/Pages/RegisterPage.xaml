@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EstateV1App.Pages.RegisterPage"
              Title="RegisterPage">
+    
     <VerticalStackLayout VerticalOptions="Center"
                          Margin="20,0,20,0"
                          Spacing="20">
@@ -47,5 +48,4 @@
         </HorizontalStackLayout>
 
     </VerticalStackLayout>
-
 </ContentPage>

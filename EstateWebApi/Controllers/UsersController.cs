@@ -2,6 +2,11 @@
 using EstateWebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.InteropServices;
+using System.Security.Claims;
+using System.Text;
 
 namespace EstateWebApi.Controllers
 {
@@ -11,9 +16,11 @@ namespace EstateWebApi.Controllers
     {
         ApiDbContext dbContext = new ApiDbContext();
 
-        public UsersController() 
+        private IConfiguration configuration;
+
+        public UsersController(IConfiguration configuration) 
         {
-            
+            this.configuration = configuration;
         }
 
         [HttpGet("[action]")]
@@ -32,6 +39,57 @@ namespace EstateWebApi.Controllers
             return Ok(users);
         }
 
+        [HttpGet("[action]")]
+        public IActionResult Register(User user)
+        {
+            var userExists = dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
+            if(userExists != null)
+            {
+                return BadRequest("동일한 이메일의 기존사용자가 존재합니다.");
+            }
+            dbContext.Users.Add(user);
+            dbContext.SaveChanges();
 
+            return StatusCode(StatusCodes.Status201Created);
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult Login(Login user)
+        {
+            var currentUser = dbContext.Users.FirstOrDefault(u=> u.Email == user.Email && u.Password == user.Password);
+            if(currentUser == null) 
+            {
+                return NotFound();
+            }
+
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+
+            // token 생성
+            var token = new JwtSecurityToken(
+                issuer: configuration["JWT:Issuer"],
+                audience: configuration["JWT:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddDays(60),
+                signingCredentials: credentials
+                );
+
+            // tokenHandler에 토큰을 write함
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return new ObjectResult(
+                new
+                {
+                    access_token = jwt,
+                    token_type = "Bearer",
+                    user_id = currentUser.Id,
+                    user_name = currentUser.Name
+                });            
+        }
     }
 }

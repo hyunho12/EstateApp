@@ -26,6 +26,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// ValidateIssuer, ValidateAudience를 false로 하면, ValidIssuer, ValidAudience 지정 X
+// 
+
 
 var app = builder.Build();
 
@@ -40,6 +43,7 @@ app.UseStaticFiles();
 
 //app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

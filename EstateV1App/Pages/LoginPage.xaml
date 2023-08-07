@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EstateV1App.Pages.LoginPage"
              Title="LoginPage">
+    
     <VerticalStackLayout VerticalOptions="Center"
                          Margin="20,0,20,0"
                          Spacing="20">

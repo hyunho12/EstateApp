@@ -16,7 +16,7 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.estatev1app</ApplicationId>
-		<ApplicationIdGuid>6a38ddf2-4fa5-432a-af24-d39253547171</ApplicationIdGuid>
+		<ApplicationIdGuid>d9f286e0-51cd-4e63-be42-f46cd4de9e8e</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -54,6 +54,7 @@
 	  <None Remove="Resources\Images\bookmark_empty_icon.svg" />
 	  <None Remove="Resources\Images\bookmark_fill_icon.svg" />
 	  <None Remove="Resources\Images\bookmark_icon.svg" />
+	  <None Remove="Resources\Images\dotnet_bot.svg" />
 	  <None Remove="Resources\Images\faq_icon.svg" />
 	  <None Remove="Resources\Images\home_icon.svg" />
 	  <None Remove="Resources\Images\house02.jpg" />
@@ -68,11 +69,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  </PackageReference>
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
@@ -95,12 +91,15 @@
 	  <MauiXaml Update="Pages\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\SearchPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Pages\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Update="Resources\Images\dotnet_bot.svg">
+	    <BaseSize>168,208</BaseSize>
+	  </MauiImage>
 	</ItemGroup>
 
 </Project>

@@ -7,7 +7,8 @@
     xmlns:pages="clr-namespace:EstateV1App.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    
+    <ShellContent Title="Register" Route="register" ContentTemplate="{DataTemplate pages:RegisterPage}" />
+    <ShellContent Title="Login" Route="login" ContentTemplate="{DataTemplate pages:LoginPage}" />
 
     <TabBar>
         <Tab Title="Home" Icon="home_icon">

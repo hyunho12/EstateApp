@@ -9,10 +9,39 @@ using System.Threading.Tasks;
 namespace EstateV1App.Services
 {
     public class ApiService
-    {       
+    {
+        public static async Task<bool> RegisterUser(string name, string email, string password, string phone)
+        {
+            var register = new Register()
+            {
+                Name = name,
+                Email = email,
+                Password = password,
+                Phone = phone
+            };
+
+            HttpClient client = new HttpClient();
+            var json = JsonConvert.SerializeObject(register);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(AppSettings.ApiUrl + "api/users/register", content);
+            if (!response.IsSuccessStatusCode) return false;
+            return true;
+        }
+
+        public static async Task<bool> Login(string email, string password)
+        {
+            var login = new Login()
+            {
+                Email = email,
+                Password = password
+            };
+            HttpClient client = new HttpClient();
+            var json = JsonConvert.SerializeObject(login);
+        }
+
         public static async Task<List<Category>> GetCategories()
         {
-            HttpClient client = new HttpClient();            
+            HttpClient client = new HttpClient();
             var response = await client.GetStringAsync(AppSettings.ApiUrl + "api/Categories/GetCategory");
             return JsonConvert.DeserializeObject<List<Category>>(response);
         }

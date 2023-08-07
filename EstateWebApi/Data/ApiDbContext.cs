@@ -7,11 +7,11 @@ namespace EstateWebApi.Data
 {
     public class ApiDbContext : DbContext
     {
-        DbSet<User> users { get; set; }
-        DbSet<Category> categories { get; set; }
-        DbSet<RealProperty> realProperties { get; set; }
-        DbSet<Bookmark> bookmarks { get; set; }
-        DbSet<PropertyDetail> propertyDetail { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<RealProperty> RealProperties { get; set; }
+        public DbSet<Bookmark> Bookmarks { get; set; }
+        public DbSet<PropertyDetail> PropertyDetail { get; set; }
 
         public ApiDbContext()
         {
@@ -26,7 +26,6 @@ namespace EstateWebApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
-
                 new Category { Id = 1, Name = "Hotel", ImageUrl = "hotel.png" },
                 new Category { Id = 2, Name = "House", ImageUrl = "house.png" },
                 new Category { Id = 3, Name = "Apartment", ImageUrl = "apartment.png" },

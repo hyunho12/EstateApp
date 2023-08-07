@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EstateV1App.Pages.PropertiesListPage"
              Title="PropertiesListPage">
-
-    
     <CollectionView x:Name="CvProperties"
                     Margin="10"
                     SelectionMode="Single"
@@ -40,5 +38,4 @@
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
-    
 </ContentPage>

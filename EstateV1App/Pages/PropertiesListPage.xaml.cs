@@ -1,17 +1,16 @@
 using EstateV1App.Models;
 using EstateV1App.Services;
-using Microsoft.Maui.Controls;
 
 namespace EstateV1App.Pages;
 
 public partial class PropertiesListPage : ContentPage
 {
-	public PropertiesListPage(int categoryId, string categoryName) 
-    {
+	public PropertiesListPage(int categoryId, string categoryName)
+	{
 		InitializeComponent();
-        Title = categoryName;
-        GetPropertiesList(categoryId);
-    }
+		Title = categoryName;
+		GetPropertiesList(categoryId);
+	}
 
     private async void GetPropertiesList(int categoryId)
     {
@@ -23,7 +22,7 @@ public partial class PropertiesListPage : ContentPage
     {
         var currentSelection = e.CurrentSelection.FirstOrDefault() as PropertyByCategory;
         if (currentSelection == null) return;
-        Navigation.PushModalAsync(new PropertyDetailPage(currentSelection.Id));
+        //Navigation.PushModalAsync(new PropertyDetailPage(currentSelection.Id));
         ((CollectionView)sender).SelectedItem = null;
     }
 }

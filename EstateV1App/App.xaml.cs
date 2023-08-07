@@ -1,6 +1,4 @@
-﻿using EstateV1App.Pages;
-
-namespace EstateV1App
+﻿namespace EstateV1App
 {
     public partial class App : Application
     {
@@ -9,7 +7,6 @@ namespace EstateV1App
             InitializeComponent();
 
             MainPage = new AppShell();
-            //MainPage = new HomePage();
         }
     }
 }
