@@ -28,7 +28,8 @@ public partial class HomePage : ContentPage
     {
         var currentSelection = e.CurrentSelection.FirstOrDefault() as Category;
         if (currentSelection == null) return;
-        await Navigation.PushAsync(new PropertiesListPage(currentSelection.Id, currentSelection.Name));
+        //await Navigation.PushAsync(new PropertiesListPage(currentSelection.Id, currentSelection.Name));
+        await Shell.Current.Navigation.PushAsync(new PropertiesListPage(currentSelection.Id, currentSelection.Name));
         ((CollectionView)sender).SelectedItem = null;
     }
 

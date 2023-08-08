@@ -28,7 +28,7 @@
                          WidthRequest="40"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         Clicked="ImgbackBtn_Clicked" />
+                         Clicked="ImgbackBtn_ClickedAsync" />
             <ImageButton x:Name="ImgbookmarkBtn"
                          CornerRadius="10"
                          BackgroundColor="White"

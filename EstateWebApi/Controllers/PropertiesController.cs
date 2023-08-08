@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EstateWebApi.Data;
 using EstateV1App.Models;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EstateWebApi.Controllers
 {
@@ -10,109 +13,47 @@ namespace EstateWebApi.Controllers
     [ApiController]
     public class PropertiesController : ControllerBase
     {                
+        private ApiDbContext dbContext = new ApiDbContext();
+
         public PropertiesController()
         {
 
         }
 
-        [HttpGet("GetRealProperty")]
-        public IActionResult GetRealProperty()
-        {
-            List<RealProperty> properties = new List<RealProperty>
-            {
-                new RealProperty{Id = 1, Name = "Blue World", Detail = "two bedroom blue world", Address = "Dubai Marina", ImageUrl = "imagep7.jpg",
-                    Price = 30000, IsTrending = true, CategoryId = 3, UserId = 2},
-                new RealProperty{Id = 2, Name = "Marina", Detail = "Sky global Real Estate", Address = "Dubai", ImageUrl = "imagep2.jpg", Price = 70000, IsTrending = true,
-                    CategoryId = 1, UserId = 1},
-                new RealProperty{Id = 3, Name = "Palm View", Detail = "Allsopp Real Estate", Address = "Palm Tower", ImageUrl = "imagep5.jpg", Price = 75000, IsTrending = true, 
-                    CategoryId = 4, UserId = 2},
-                new RealProperty{Id = 4, Name = "Avant Tower", Detail = "Three bed room apartment", Address = "Dubai Marina", ImageUrl = "imagep7.jpg", Price = 40000,
-                    IsTrending = true, CategoryId = 2, UserId = 5}
-            };
-
-            return Ok(properties);
-        }
-
         [HttpGet("GetRealPropertyList")]
-        public IActionResult GetPropertiesList(int categoryId)
-        {            
-            List<RealProperty> properties = new List<RealProperty>();            
-
-            if(categoryId == 1)
+        public IActionResult GetRealProperties(int categoryId) 
+        {
+            var propertiesResult = dbContext.RealProperties.Where(c => c.CategoryId == categoryId);
+            if(propertiesResult == null)
             {
-                properties = new List<RealProperty>
-                {                
-                    new RealProperty{Id = 2, Name = "Marina", Detail = "Sky global Real Estate", Address = "Dubai", ImageUrl = "imagep2.jpg", Price = 70000, IsTrending = true,
-                        CategoryId = 1, UserId = 1}              
-                };
+                return NotFound();
             }
-            else if( categoryId == 2)
-            {
-                properties = new List<RealProperty>
-                {                
-                    new RealProperty{Id = 4, Name = "Avant Tower", Detail = "Three bed room apartment", Address = "Dubai Marina", ImageUrl = "imagep7.jpg", Price = 40000,
-                        IsTrending = true, CategoryId = 2, UserId = 5}
-                };
-            }
-            else if(categoryId == 3)
-            {
-                properties = new List<RealProperty>
-                {
-                    new RealProperty{Id = 1, Name = "Blue World", Detail = "two bedroom blue world", Address = "Dubai Marina", ImageUrl = "imagep7.jpg",
-                        Price = 30000, IsTrending = true, CategoryId = 3, UserId = 2},                
-                };
-            }
-            else if(categoryId == 4)
-            {
-                properties = new List<RealProperty>
-                {
-                    new RealProperty{Id = 3, Name = "Palm View", Detail = "Allsopp Real Estate", Address = "Palm Tower", ImageUrl = "imagep5.jpg", Price = 75000, IsTrending = true,
-                        CategoryId = 4, UserId = 2},                
-                };
-            }            
-
-            return Ok(properties);
+            return Ok(propertiesResult);
         }
 
-        [HttpGet("GetRealPropertyDetail")]
-        public IActionResult GetRealPropertyDetail(int propertyId)
+        [HttpGet("GetPropertyDetail")]
+        [Authorize]
+        public IActionResult GetPropertyDetail(int propertyId)
         {
-            List<PropertyDetail> properties = new List<PropertyDetail>();
+            var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            var user = dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
 
-            if (propertyId == 1)
-            {
-                properties = new List<PropertyDetail>
-                {
-                    new PropertyDetail{Id = 2, Name = "Marina", Detail = "Sky global Real Estate", Address = "Dubai", Price = 70000, ImageUrl = "imagep2.jpg",  
-                         Phone = "010-5545-6985"}
-                };
-            }
-            else if (propertyId == 2)
-            {
-                properties = new List<PropertyDetail>
-                {
-                    new PropertyDetail{Id = 4, Name = "Avant Tower", Detail = "Three bed room apartment", Address = "Dubai Marina", Price = 40000, ImageUrl = "imagep7.jpg", 
-                        Phone = "010-4587-2685"}
-                };
-            }
-            else if (propertyId == 3)
-            {
-                properties = new List<PropertyDetail>
-                {
-                    new PropertyDetail{Id = 1, Name = "Blue World", Detail = "two bedroom blue world", Address = "Dubai Marina", Price = 30000, ImageUrl = "imagep7.jpg",
-                         Phone = "010-2335-5543"}
-                };
-            }
-            else if (propertyId == 4)
-            {
-                properties = new List<PropertyDetail>
-                {
-                    new PropertyDetail{Id = 3, Name = "Palm View", Detail = "Allsopp Real Estate", Address = "Palm Tower", Price = 75000, ImageUrl = "imagep5.jpg",  
-                        Phone = "010-4529-8569"}
-                };
-            }
+            if(user == null) { return NotFound(); }
 
-            return Ok(properties);
+            var propertyResult = dbContext.RealProperties.Find(propertyId);
+
+            if(propertyResult !=null) 
+            {
+                var result = dbContext.RealProperties.Where(p => p.Id == propertyId)
+                    .Select(p => new 
+                    {p.Id, p.Name, p.Detail, p.Address, p.Price, p.ImageUrl, p.User.Phone}).FirstOrDefault();
+
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

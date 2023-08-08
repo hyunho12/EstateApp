@@ -1,4 +1,5 @@
 using EstateV1App.Services;
+using System.Diagnostics;
 
 namespace EstateV1App.Pages;
 
@@ -12,7 +13,12 @@ public partial class RegisterPage : ContentPage
 
     private async void CheckAccessToken()
     {
-        var accessToken = Preferences.Get("accesstoken", string.Empty);
+        //Preferences.Clear();
+        var token = Preferences.Get("accessToken", string.Empty); //accessToken
+        Debug.WriteLine("accessToken= ");
+        Debug.WriteLine(token);
+
+        var accessToken = Preferences.Get("accessToken", string.Empty);
         if(string.IsNullOrEmpty(accessToken) )
         {
             await Shell.Current.GoToAsync("///register");

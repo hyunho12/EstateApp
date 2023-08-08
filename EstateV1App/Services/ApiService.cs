@@ -1,7 +1,9 @@
 ﻿using EstateV1App.Models;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,20 +57,17 @@ namespace EstateV1App.Services
         public static async Task<List<Category>> GetCategories()
         {
             HttpClient client = new HttpClient();
+            // api http request요청을 보낼때 받은 인증토큰을 헤더(Authorization: Bearer 토큰문자열)로 보내 인증통과하도록 하고, 응답을 수신
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("accessToken", string.Empty));
+
             var response = await client.GetStringAsync(AppSettings.ApiUrl + "api/Categories/GetCategory");
             return JsonConvert.DeserializeObject<List<Category>>(response);
-        }
-
-        public static async Task<List<TrendingProperty>> GetRealProperties()
-        {
-            HttpClient client = new HttpClient();
-            var response = await client.GetStringAsync(AppSettings.ApiUrl + "api/Properties/GetRealProperty");
-            return JsonConvert.DeserializeObject<List<TrendingProperty>>(response);
         }
 
         public static async Task<List<PropertyByCategory>> GetPropertyByCategory(int categoryId)
         {
             HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("accessToken", string.Empty));
             var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/GetRealPropertyList?categoryId=" + categoryId);
             return JsonConvert.DeserializeObject<List<PropertyByCategory>>(response);
         }
@@ -76,8 +75,17 @@ namespace EstateV1App.Services
         public static async Task<PropertyDetail> GetPropertyDetail(int propertyId)
         {
             HttpClient httpClient = new HttpClient();
-            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/GetRealPropertyDetail?propertyId=" + propertyId);
-            return JsonConvert.DeserializeObject<PropertyDetail>(response); // 현재 api서버에서 list 형식으로 반환 json 매핑 오류
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("accessToken", string.Empty));
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Properties/GetPropertyDetail?propertyId=" + propertyId);
+            return JsonConvert.DeserializeObject<PropertyDetail>(response); 
         }
+
+        public static async Task<List<TrendingProperty>> GetRealProperties()
+        {
+            HttpClient client = new HttpClient();            
+            var response = await client.GetStringAsync(AppSettings.ApiUrl + "api/Properties/GetRealProperty");
+            return JsonConvert.DeserializeObject<List<TrendingProperty>>(response);
+        }
+        
     }
 }
