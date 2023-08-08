@@ -38,7 +38,18 @@ namespace EstateV1App.Services
             HttpClient client = new HttpClient();
             var json = JsonConvert.SerializeObject(login);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(AppSettings.ApiUrl + "api/users/login", content);
+            if(!response.IsSuccessStatusCode) return false;
+            
+            //login이 성공시 값을 받아 인증토큰 생성
+            var jsonResult = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<Token>(jsonResult);
 
+            Preferences.Set("accessToken", result.AccessToken);
+            Preferences.Set("userid", result.UserId);
+            Preferences.Set("username", result.UserName);
+            
+            return true;
         }
 
         public static async Task<List<Category>> GetCategories()

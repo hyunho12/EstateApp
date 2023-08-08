@@ -16,11 +16,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
             ValidateLifetime = true,
-            ValidAudience = builder.Configuration.GetSection("JWT:Audience").Value,
-            ValidIssuer = builder.Configuration.GetSection("JWT:Issuer").Value,
+            //ValidAudience = builder.Configuration.GetSection("JWT:Audience").Value,
+            //ValidIssuer = builder.Configuration.GetSection("JWT:Issuer").Value,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
         };

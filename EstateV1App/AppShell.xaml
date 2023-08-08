@@ -12,7 +12,7 @@
 
     <TabBar>
         <Tab Title="Home" Icon="home_icon">
-            <ShellContent Title="Home" Route="Home" Icon="home_icon" ContentTemplate="{DataTemplate pages:HomePage}" />
+            <ShellContent Title="Home" Route="home" Icon="home_icon" ContentTemplate="{DataTemplate pages:HomePage}" />
         </Tab>
         <Tab Title="북마크" Icon="bookmark_icon">
             <ShellContent Title="Saved" Route="bookmark" ContentTemplate="{DataTemplate pages:BooksmarkPage}" />

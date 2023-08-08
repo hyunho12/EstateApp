@@ -39,7 +39,7 @@ namespace EstateWebApi.Controllers
             return Ok(users);
         }
 
-        [HttpGet("[action]")]
+        [HttpPost("[action]")]
         public IActionResult Register(User user)
         {
             var userExists = dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
@@ -53,7 +53,7 @@ namespace EstateWebApi.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
-        [HttpGet("[action]")]
+        [HttpPost("[action]")]
         public IActionResult Login(Login user)
         {
             var currentUser = dbContext.Users.FirstOrDefault(u=> u.Email == user.Email && u.Password == user.Password);
@@ -72,8 +72,8 @@ namespace EstateWebApi.Controllers
 
             // token 생성
             var token = new JwtSecurityToken(
-                issuer: configuration["JWT:Issuer"],
-                audience: configuration["JWT:Audience"],
+                //issuer: configuration["JWT:Issuer"],
+                //audience: configuration["JWT:Audience"],
                 claims: claims,
                 expires: DateTime.Now.AddDays(60),
                 signingCredentials: credentials
