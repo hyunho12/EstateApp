@@ -82,10 +82,12 @@ namespace EstateV1App.Services
 
         public static async Task<List<TrendingProperty>> GetRealProperties()
         {
-            HttpClient client = new HttpClient();            
-            var response = await client.GetStringAsync(AppSettings.ApiUrl + "api/Properties/GetRealProperty");
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("accessToken", string.Empty));
+            var response = await client.GetStringAsync(AppSettings.ApiUrl + "api/Properties/TrendingProperties");
             return JsonConvert.DeserializeObject<List<TrendingProperty>>(response);
         }
         
+
     }
 }

@@ -21,6 +21,6 @@ namespace EstateV1App.Models
         public string FullImageUrl => AppSettings.ApiUrl + ImageUrl;
 
         [JsonProperty("properties")]
-        public object Properties { get; set; }
+        public object RealProperties { get; set; }
     }
 }

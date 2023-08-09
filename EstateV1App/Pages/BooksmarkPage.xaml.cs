@@ -6,4 +6,9 @@ public partial class BooksmarkPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void CvProperties_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
 }

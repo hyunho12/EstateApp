@@ -21,6 +21,7 @@ namespace EstateWebApi.Controllers
         }
 
         [HttpGet("GetRealPropertyList")]
+        [Authorize]
         public IActionResult GetRealProperties(int categoryId) 
         {
             var propertiesResult = dbContext.RealProperties.Where(c => c.CategoryId == categoryId);
@@ -35,10 +36,10 @@ namespace EstateWebApi.Controllers
         [Authorize]
         public IActionResult GetPropertyDetail(int propertyId)
         {
-            var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var user = dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
+            //var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            //var user = dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
 
-            if(user == null) { return NotFound(); }
+            //if(user == null) { return NotFound(); }
 
             var propertyResult = dbContext.RealProperties.Find(propertyId);
 
@@ -55,5 +56,18 @@ namespace EstateWebApi.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet("TrendingProperties")]
+        [Authorize]
+        public IActionResult GetTrendingProperties()
+        {
+            var propertiesResult = dbContext.RealProperties.Where(c => c.IsTrending == true);
+            if(propertiesResult == null)
+            {
+                return NotFound();
+            }
+            return Ok(propertiesResult);
+        }
+
     }
 }

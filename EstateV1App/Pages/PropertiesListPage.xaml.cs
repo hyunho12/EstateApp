@@ -27,7 +27,7 @@ public partial class PropertiesListPage : ContentPage
     {
         var currentSelection = e.CurrentSelection.FirstOrDefault() as PropertyByCategory;
         if (currentSelection == null) return;
-        Navigation.PushModalAsync(new PropertyDetailPage(currentSelection.Id));
+        Navigation.PushAsync(new PropertyDetailPage(currentSelection.Id));
         ((CollectionView)sender).SelectedItem = null;
     }
 }

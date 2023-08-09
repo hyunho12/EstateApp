@@ -33,13 +33,16 @@ public partial class HomePage : ContentPage
         ((CollectionView)sender).SelectedItem = null;
     }
 
-    private void CvTopPicks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void CvTopPicks_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-
+        var currentSelection = e.CurrentSelection.FirstOrDefault() as TrendingProperty;
+        if (currentSelection == null) return;
+        await Shell.Current.Navigation.PushAsync(new PropertyDetailPage(currentSelection.Id));
+        ((CollectionView)sender).SelectedItem = null;
     }
 
     private void TapSearch_Tapped(object sender, EventArgs e)
     {
-
+        Navigation.PushAsync(new SearchPage());
     }
 }
