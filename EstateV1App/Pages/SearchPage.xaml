@@ -4,9 +4,31 @@
              x:Class="EstateV1App.Pages.SearchPage"
              Title="SearchPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid BackgroundColor="#1d94ab" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <SearchBar Grid.Column="0"
+                       x:Name="SbProperty"
+                       TextColor="Black"
+                       BackgroundColor="White"
+                       Placeholder="검색"                       
+                       SearchButtonPressed="SbProperty_SearchButtonPressed"
+                       TextChanged="SbProperty_TextChanged" />
+        </Grid>
+        <CollectionView x:Name="CvSearch"
+                        SelectionMode="Single"
+                        SelectionChanged="CvSearch_SelectionChanged">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label FontSize="Medium"
+                           Text="{Binding Address}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

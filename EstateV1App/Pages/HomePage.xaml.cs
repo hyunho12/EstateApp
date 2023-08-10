@@ -43,6 +43,7 @@ public partial class HomePage : ContentPage
 
     private void TapSearch_Tapped(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new SearchPage());
+        //Navigation.PushAsync(new SearchPage());
+        Shell.Current.Navigation.PushAsync(new SearchPage());
     }
 }

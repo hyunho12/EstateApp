@@ -30,9 +30,9 @@ namespace EstateWebApi.Controllers
 
 
         //[HttpGet("[action]")]
-        [Authorize(AuthenticationSchemes = "Bearer")]
+        //[Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet("GetCategory")]
-        //[Authorize]        
+        [Authorize]        
         public IActionResult GetCategory()
         {
             return Ok(dbContext.Categories);

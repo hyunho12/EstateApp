@@ -15,7 +15,6 @@ namespace EstateWebApi.Models
 
         [JsonIgnore]
         public Category Category { get; set; }
-
         public int UserId { get; set; }
 
         [JsonIgnore]

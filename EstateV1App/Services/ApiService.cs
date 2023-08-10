@@ -84,10 +84,17 @@ namespace EstateV1App.Services
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("accessToken", string.Empty));
-            var response = await client.GetStringAsync(AppSettings.ApiUrl + "api/Properties/TrendingProperties");
+            var response = await client.GetStringAsync(AppSettings.ApiUrl + "api/Properties/GetTrendingProperties");
             return JsonConvert.DeserializeObject<List<TrendingProperty>>(response);
         }
-        
+
+        public static async Task<List<SearchProperty>> FindProperties(string address)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("accessToken", string.Empty));
+            var response = await client.GetStringAsync(AppSettings.ApiUrl + "api/Properties/GetSearchProperties?address="+address);
+            return JsonConvert.DeserializeObject<List<SearchProperty>>(response);
+        }
 
     }
 }

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EstateWebApi.Data;
-using EstateV1App.Models;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +12,7 @@ namespace EstateWebApi.Controllers
     [ApiController]
     public class PropertiesController : ControllerBase
     {                
-        private ApiDbContext dbContext = new ApiDbContext();
+        ApiDbContext dbContext = new ApiDbContext();
 
         public PropertiesController()
         {
@@ -57,7 +56,7 @@ namespace EstateWebApi.Controllers
             }
         }
 
-        [HttpGet("TrendingProperties")]
+        [HttpGet("GetTrendingProperties")]
         [Authorize]
         public IActionResult GetTrendingProperties()
         {
@@ -66,6 +65,19 @@ namespace EstateWebApi.Controllers
             {
                 return NotFound();
             }
+            return Ok(propertiesResult);
+        }
+
+        [HttpGet("GetSearchProperties")]
+        [Authorize]
+        public IActionResult GetSearchProperties(string address)
+        {
+            var propertiesResult = dbContext.RealProperties.Where(p => p.Address.Contains(address));
+            if (propertiesResult == null)
+            {
+                return NotFound();
+            }
+
             return Ok(propertiesResult);
         }
 

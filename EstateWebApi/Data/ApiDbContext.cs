@@ -1,5 +1,4 @@
-﻿using EstateV1App.Models;
-using EstateWebApi.Models;
+﻿using EstateWebApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -11,7 +10,7 @@ namespace EstateWebApi.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<RealProperty> RealProperties { get; set; }
         public DbSet<Bookmark> Bookmarks { get; set; }
-        public DbSet<PropertyDetail> PropertyDetail { get; set; }
+        //public DbSet<PropertyDetail> PropertyDetail { get; set; }
 
         public ApiDbContext()
         {
