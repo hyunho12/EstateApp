@@ -24,11 +24,11 @@ public partial class SearchPage : ContentPage
 
     private void CvSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        //var currentSelection = e.CurrentSelection.FirstOrDefault() as SearchProperty;
-        //if (currentSelection == null) return;
-        //Navigation.PushAsync(new PropertyDetailPage(currentSelection.Id));
-        ////await Shell.Current.Navigation.PushAsync(new PropertyDetailPage(currentSelection.Id));
-        //((CollectionView)sender).SelectedItem = null;
+        var currentSelection = e.CurrentSelection.FirstOrDefault() as SearchProperty;
+        if (currentSelection == null) return;
+        Navigation.PushAsync(new PropertyDetailPage(currentSelection.Id));
+        //await Shell.Current.Navigation.PushAsync(new PropertyDetailPage(currentSelection.Id));
+        ((CollectionView)sender).SelectedItem = null;
     }
 
     private void SbProperty_SearchButtonPressed(object sender, EventArgs e)

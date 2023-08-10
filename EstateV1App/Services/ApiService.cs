@@ -96,5 +96,34 @@ namespace EstateV1App.Services
             return JsonConvert.DeserializeObject<List<SearchProperty>>(response);
         }
 
+        public static async Task<List<BookmarkList>> GetBookmarkList()
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("accessToken", string.Empty));
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Bookmarks");
+            return JsonConvert.DeserializeObject<List<BookmarkList>>(response);
+        }
+
+        public static async Task<bool> AddBookmark(AddBookmark addBookmark)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("accessToken", string.Empty));
+
+            var json = JsonConvert.SerializeObject(addBookmark);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            
+            var response = await httpClient.PostAsync(AppSettings.ApiUrl + "api/Bookmarks/BookmarkSave", content);
+            if(!response.IsSuccessStatusCode) { return false; }
+            return true;
+        }
+
+        public static async Task<bool> DeleteBookmark(int bookmarkId)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("accessToken", string.Empty));
+            var response = await httpClient.DeleteAsync(AppSettings.ApiUrl + "api/Bookmarks/" + bookmarkId);
+            if (!response.IsSuccessStatusCode) { return false; }
+            return true;
+        }
     }
 }

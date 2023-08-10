@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EstateV1App.Models
 {
-    public class Bookmark
+    public class BookmarkList
     {
         [JsonProperty("id")]
         public int Id { get; set; }

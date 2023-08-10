@@ -20,15 +20,6 @@
         <StackLayout Orientation="Horizontal"
                      Grid.Row="1"
                      Margin="20,0,20,0">
-            <ImageButton x:Name="ImgbackBtn"
-                         Source="back_icon"
-                         CornerRadius="10"
-                         BackgroundColor="White"
-                         HeightRequest="40"
-                         WidthRequest="40"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         Clicked="ImgbackBtn_ClickedAsync" />
             <ImageButton x:Name="ImgbookmarkBtn"
                          CornerRadius="10"
                          BackgroundColor="White"
