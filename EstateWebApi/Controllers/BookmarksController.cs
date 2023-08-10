@@ -1,11 +1,13 @@
 ﻿using EstateWebApi.Data;
 using EstateWebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace EstateWebApi.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class BookmarksController : ControllerBase
@@ -42,11 +44,18 @@ namespace EstateWebApi.Controllers
             return Ok(bookmarks);
         }
 
-        [HttpPost("BookmarkSave")]
-        public IActionResult BookmarkSave(Bookmark bookmarkItem)
+        [Authorize]
+        [HttpPost("[action]")]
+        public IActionResult BookmarkSave([FromBody] AddBookmark bookmarkItem)
         {
-            bookmarkItem.Status = true;
-            dbContext.Bookmarks.Add(bookmarkItem);
+            Bookmark bookmark = new Bookmark
+            {
+                Status = true,
+                User_Id = bookmarkItem.User_Id,
+                RealPropertyId = bookmarkItem.PropertyId
+            };
+            
+            dbContext.Bookmarks.Add(bookmark);
             dbContext.SaveChanges();
             return Ok("Bookmark added");
         }
